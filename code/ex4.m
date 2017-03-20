@@ -1,10 +1,10 @@
-%% Inteligencia Artficial - ExercÌcio 4: Regress„o LogÌstica e regularizaÁ„o
+%% Inteligencia Artficial - Exerc√≠cio 4: Regress√£o Log√≠stica e regulariza√ß√£o
 %
-%  InstruÁıes
+%  Instru√ß√µes
 %  ------------
-%  Nesta atividade, vocÍ ir· implementar o algoritmo de regress„o logÌstica
-%  para um conjunto de dados que n„o È linearmente separ·vel.
-%  VocÍ deve alterar os seguintes arquivos:
+%  Nesta atividade, voc√™ ir√° implementar o algoritmo de regress√£o log√≠stica
+%  para um conjunto de dados que n√£o √© linearmente separ√°vel.
+%  Voc√™ alterar os seguintes arquivos:
 %   
 %     sigmoid.m
 %     costFunction.m
@@ -12,19 +12,19 @@
 %     costFunctionReg.m
 %     
 %
-%%  E N√O deve alterar o cÛdigo deste arquivo.
+%%  E N√ÉO deve alterar o c√≥digo deste arquivo.
 %
-% Este exercÌcio foi baseado no curso de aprendizado de m·quina de
+% Este exerc√≠cio foi baseado no curso de aprendizado de m√°quina de
 % Stanford.
 
 
-%% InitializaÁ„o
+%% Initializa√ß√£o
 clear ; close all; clc
 
 %% Carregando dados
-%  Os dados est„o organizados em uma matrix. As duas primeiras colunas 
-% deste matriz contÈm os valores de entrada (X) e 
-% a terceira e ˙ltima coluna contÈm a classe (y).
+%  Os dados est√£o organizados em uma matrix. As duas primeiras colunas 
+% deste matriz cont√©m os valores de entrada (X) e 
+% a terceira e √∫ltima coluna cont√©m a classe (y).
 
 data = load('ex4data.txt');
 X = data(:, [1, 2]); % entrada
@@ -43,28 +43,28 @@ legend('y = 1', 'y = 0')
 hold off;
 
 
-%% =========== Parte 1: Regress„o LogÌstica e RegularizaÁ„o ============
-%  Nesta atividade, vocÍ ir· implementar o algoritmo de regress„o logÌstica
-%  para um conjunto de dados que n„o È linearmente separ·vel. 
+%% =========== Parte 1: Regress√£o Log√≠stica e Regulariza√ß√£o ============
+%  Nesta atividade, voc√™ ir√° implementar o algoritmo de regress√£o log√≠stica
+%  para um conjunto de dados que n√£o √© linearmente separ√°vel. 
 %
-%  Tal como vimos em aula, nestes casos È necess·rio considerar uma 'combinaÁ„o
-%  polinomial' de caracterÌsticas. 
+%  Tal como vimos em aula, nestes casos √© necess√°rio considerar uma 'combina√ß√£o
+%  polinomial' de caracter√≠sticas. 
 
-% A funÁ„o 'mapFeatures' cria esta combinaÁ„o para um polinÙnimo de grau 6
+% A fun√ß√£o 'mapFeatures' cria esta combina√ß√£o para um polin√¥nimo de grau 6
 X = mapFeature(X(:,1), X(:,2));
 
-% Ao fim deste processo o vetor X ter· a seguinte configuraÁ„o:
+% Ao fim deste processo o vetor X ter√° a seguinte configura√ß√£o:
 %
 % X = [1 x1 x2 x1^2 x1x2 x2^2 x1^3 .... x1x2^5 x2^6]
 
-% Valores iniciais dos par‚metros
+% Valores iniciais dos par√¢metros
 initial_theta = zeros(size(X, 2), 1);
 
-% par‚metro de regularizaÁ„o
+% par√¢metro de regulariza√ß√£o
 lambda = 0;
 
-% Implemente a funÁ„o de custo e teste o algoritmo. 
-% A funÁ„o de custo deve devolver o custo e o vetor gradiente da funcao de custo.
+% Implemente a fun√ß√£o de custo e teste o algoritmo. 
+% A fun√ß√£o de custo deve devolver o custo e o vetor gradiente da funcao de custo.
 [cost, grad] = costFunctionReg(initial_theta, X, y, lambda);
 
 fprintf('Custo para o valor inicial theta (zeros): %f\n', cost);
@@ -72,20 +72,20 @@ fprintf('Custo para o valor inicial theta (zeros): %f\n', cost);
 fprintf('\n Aperte enter para continuar.\n');
 pause;
 
-%% ============= Parte 2: Analisando o efeito da regularizaÁ„o =============
+%% ============= Parte 2: Analisando o efeito da regulariza√ß√£o =============
 %  
-% Nesta parte da atividade, vocÍ avaliar· o efeito da regularizaÁ„o na precis„o 
+% Nesta parte da atividade, voc√™ avaliar√° o efeito da regulari√ß√£o na precis√£o 
 % do aprendizado. 
 %
 % Para tanto, teste o programa com diferentes lambda (por exemplo, 0, 1, 10 
-% e 100) e avalie como a superfÌcie de decis„o e a precis„o do classificador
+% e 100) e avalie como a superf√≠cie de decis√£o e a precis√£o do classificador
 % mudam em cada caso.
 %
 
-% Valores iniciais dos par‚metros
+% Valores iniciais dos par√¢metros
 initial_theta = zeros(size(X, 2), 1);
 
-% Mude o valor de lambda para ver o efeito da regularizaÁ„o
+% Mude o valor de lambda para ver o efeito da regulariza√ß√£o
 lambda = 1;
 
 % Set Options
@@ -95,7 +95,7 @@ options = optimset('GradObj', 'on', 'MaxIter', 400);
 [theta, J, exit_flag] = ...
 	fminunc(@(t)(costFunctionReg(t, X, y, lambda)), initial_theta, options);
 
-% mostrando a fronteira de decis„o
+% mostrando a fronteira de decis√£o
 plotDecisionBoundary(theta, X, y);
 hold on;
 title(sprintf('lambda = %g', lambda))
@@ -104,12 +104,12 @@ title(sprintf('lambda = %g', lambda))
 xlabel('Teste 1')
 ylabel('Teste 2')
 
-legend('y = 1', 'y = 0', 'Front. decis„o')
+legend('y = 1', 'y = 0', 'Front. decis√£o')
 hold off;
 
-% Calculando a precis„o do treinamento
+% Calculando a precis√£o do treinamento
 p = predict(theta, X);
 
-fprintf('Precis„o: %f\n', mean(double(p == y)) * 100);
+fprintf('Precis√£o: %f\n', mean(double(p == y)) * 100);
 
 pause
